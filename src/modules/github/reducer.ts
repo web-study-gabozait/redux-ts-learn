@@ -1,4 +1,5 @@
 import { createReducer } from "typesafe-actions";
+import { asyncState } from "../../lib/reducerUtils";
 import {
   GET_USER_PROFILE,
   GET_USER_PROFILE_FAILURE,
@@ -7,37 +8,21 @@ import {
 import { TGithubAction, TGithubState } from "./types";
 
 const initialState: TGithubState = {
-  userProfile: {
-    loading: false,
-    error: null,
-    data: null,
-  },
+  userProfile: asyncState.initial(),
 };
 
 const github = createReducer<TGithubState, TGithubAction>(initialState, {
   [GET_USER_PROFILE]: (state) => ({
     ...state,
-    userProfile: {
-      loading: true,
-      error: null,
-      data: null,
-    },
+    userProfile: asyncState.load(),
   }),
   [GET_USER_PROFILE_SUCCESS]: (state, action) => ({
     ...state,
-    userProfile: {
-      loading: false,
-      error: null,
-      data: action.payload,
-    },
+    userProfile: asyncState.success(action.payload),
   }),
   [GET_USER_PROFILE_FAILURE]: (state, action) => ({
     ...state,
-    userProfile: {
-      loading: false,
-      error: action.payload,
-      data: null,
-    },
+    userProfile: asyncState.error(action.payload),
   }),
 });
 

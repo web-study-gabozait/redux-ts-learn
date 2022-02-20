@@ -20,11 +20,7 @@ const GithubProfileInfo: React.FC<IGithubProfileInfoProps> = ({
         <pre>{name}</pre>
       </InfoHeaderWrap>
       <InfoBio>{bio}</InfoBio>
-      {blog !== "" && (
-        <InfoGoToBlog onClick={() => window.open(blog, "_blank")}>
-          블로그
-        </InfoGoToBlog>
-      )}
+      {blog !== "" && <InfoGoToBlog href={blog}>블로그</InfoGoToBlog>}
     </InfoWrap>
   );
 };
@@ -62,6 +58,6 @@ const InfoBio = styled.p`
   margin-top: 20px;
 `;
 
-const InfoGoToBlog = styled.span`
+const InfoGoToBlog = styled.a`
   font-size: 15px;
 `;

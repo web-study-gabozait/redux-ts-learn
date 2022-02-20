@@ -10,4 +10,4 @@ export const getUserProfileAsync = createAsyncAction(
   GET_USER_PROFILE,
   GET_USER_PROFILE_SUCCESS,
   GET_USER_PROFILE_FAILURE
-)<undefined, IGithubUser, AxiosError>();
+)<void, IGithubUser, AxiosError>();
